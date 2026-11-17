@@ -3,7 +3,7 @@ const CONTACT = { email: "", phone: "" };
 const SOCIAL = { linkedin: "", facebook: "", instagram: "" };
 
 const ES = {
-  nav1: "Qué hacemos", nav2: "Cómo funciona", nav3: "Nuestros principios", nav4: "Quiénes somos", navcta: "Agendar llamada",
+  nav0: "Inicio", nav1: "Qué hacemos", nav2: "Cómo funciona", nav3: "Nuestros principios", nav4: "Quiénes somos", navcta: "Agendar llamada",
   eyebrow: "Marketing para los oficios", foot: "Marketing para los oficios",
   h1: "Llamadas con las que <em>puede contar</em>, cada semana.",
   lede: "Cada semana manejamos su perfil de Google, sus reseñas y el seguimiento a sus clientes. Usted aprueba lo que sale. Su teléfono suena.",
