@@ -64,9 +64,9 @@ h1 em { color: var(--leaf); }
   <div class="foot">© Steady Leads</div>
 </div>
 <script>
-// Phones get the yellow-leaves clip; wider screens get the forest trunk.
+// Phones get a tall crop of the golden-leaves clip; wider screens get the forest trunk.
 const phone = window.matchMedia("(max-width: 760px)").matches;
-const pick = phone ? "leaves-mobile" : "forest-2";
+const pick = phone ? "forest-mobile" : "forest-2";
 if (phone) document.documentElement.classList.add("phone");
 const v = document.getElementById("bg");
 v.poster = "assets/" + pick + ".jpg";
