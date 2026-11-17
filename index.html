@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steady Leads</title>
+<style>
+/* Layout idea: one simple column of plain sections, squared boxes with dark green edges on off-white.
+   Light theme by choice. Fonts are web-safe: Trebuchet MS headings, Tahoma text. */
+:root {
+  color-scheme: light;
+  --bg: #F3F1EB;
+  --card: #FDFCF8;
+  --ink: #1E2A24;
+  --green: #2B5140;
+  --green-dark: #1F3D30;
+  --orange: #B5481A;
+  --head: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+  --body: Tahoma, Geneva, Verdana, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.5; }
+h1, h2, h3 { font-family: var(--head); margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--green); }
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+header { border-bottom: 2px solid var(--green); background: var(--bg); position: sticky; top: 0; z-index: 5; }
+.bar { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px; }
+.mark { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: var(--head); font-size: 26px; font-weight: 700; letter-spacing: .01em; }
+nav { display: flex; gap: 28px; margin-left: auto; flex-wrap: wrap; }
+nav a { color: var(--ink); text-decoration: none; font-size: 16px; }
+nav a:hover { text-decoration: underline; }
+.lang { display: flex; border: 2px solid var(--green); border-radius: 4px; overflow: hidden; }
+.lang button { font: 700 14px var(--body); padding: 7px 11px; border: 0; background: var(--card); color: var(--ink); cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--green); color: #fff; }
+.btn { display: inline-block; font: 700 17px var(--body); padding: 14px 24px; border-radius: 4px; border: 2px solid var(--green); background: var(--green); color: #fff; text-decoration: none; cursor: pointer; }
+.btn:hover { background: var(--green-dark); border-color: var(--green-dark); }
+.btn.light { background: var(--card); color: var(--ink); }
+.btn.light:hover { background: #ECE9DF; border-color: var(--green); }
+.btn.small { font-size: 16px; padding: 11px 20px; }
+.btn.orange { background: var(--orange); border-color: var(--orange); }
+.btn.orange:hover { background: #9A3C14; border-color: #9A3C14; }
+
+.hero { padding-top: 56px; padding-bottom: 40px; display: flex; flex-direction: column; gap: 18px; }
+.eyebrow { font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
+h1 { font-size: clamp(38px, 5.6vw, 58px); line-height: 1.08; max-width: 15em; }
+h1 em { font-style: normal; color: var(--orange); }
+.lede { font-size: 19px; max-width: 34em; }
+.row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 56px; }
+.box { background: var(--card); border: 2px solid var(--green); border-radius: 4px; padding: 20px 22px; }
+.box.top { border-top-width: 8px; }
+.box h3 { font-size: 21px; margin-bottom: 8px; }
+.box p { font-size: 16px; line-height: 1.45; }
+
+.band { background: var(--card); border-top: 2px solid var(--green); border-bottom: 2px solid var(--green); padding: 52px 0; }
+h2 { font-size: clamp(28px, 3.6vw, 36px); line-height: 1.15; }
+.steps { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.steps li { border-top: 4px solid var(--orange); padding-top: 14px; }
+.steps .n { font-size: 14px; font-weight: 700; color: var(--orange); }
+.steps h3 { font-size: 20px; margin: 6px 0 8px; }
+.steps p { font-size: 16px; line-height: 1.45; }
+
+.rules { padding-top: 52px; padding-bottom: 52px; }
+.rules .three { padding-bottom: 0; margin-top: 24px; }
+.rules .box h3 { font-size: 19px; margin-bottom: 6px; }
+.rules .box p { font-size: 15.5px; }
+
+.contact { background: var(--green); color: #fff; padding: 52px 0; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.contact p { font-size: 18px; margin-top: 12px; }
+.contact .es { font-size: 16px; font-weight: 700; }
+.reach { list-style: none; margin: 18px 0 0; padding: 0; font-size: 17px; }
+.reach li { padding: 6px 0; }
+.reach a { color: #fff; }
+.setup { margin-top: 16px; padding: 12px 14px; border: 2px dashed #fff; border-radius: 4px; font-size: 14px; }
+form { background: var(--card); color: var(--ink); border: 2px solid var(--ink); border-radius: 4px; padding: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field.wide, .actions, .status { grid-column: 1 / -1; }
+label { font-size: 14px; font-weight: 700; }
+input, textarea { font: 400 16px var(--body); color: var(--ink); padding: 10px 12px; border: 2px solid var(--green); border-radius: 4px; background: #fff; width: 100%; }
+textarea { min-height: 84px; resize: vertical; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.status { font-size: 15px; min-height: 1.4em; }
+
+footer { padding: 22px 0 36px; font-size: 14px; }
+footer .wrap { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .wrap { padding: 0 20px; }
+  .three, .contact-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  nav { display: none; }
+  .lang { margin-left: auto; }
+}
+@media (max-width: 480px) {
+  .steps, form { grid-template-columns: 1fr; }
+  .hero { padding-top: 36px; }
+  .mark { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="#top" aria-label="Steady Leads">
+      <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C18.5 5.5 20.5 12.5 12 20.5C3.5 12.5 5.5 5.5 12 2Z" fill="#B5481A" transform="rotate(35 12 12)"/><path d="M12 6V19" stroke="#F3F1EB" stroke-width="1.2" transform="rotate(35 12 12)"/><path d="M12 19.5V23.5" stroke="#B5481A" stroke-width="1.6" stroke-linecap="round" transform="rotate(35 12 12)"/></svg>
+      Steady Leads
+    </a>
+    <nav aria-label="Sections">
+      <a href="#services" data-i18n="nav1">What we do</a>
+      <a href="#how" data-i18n="nav2">How it works</a>
+      <a href="#rules" data-i18n="nav3">Our rules</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-en" aria-pressed="true">EN</button>
+      <button type="button" id="lang-es" aria-pressed="false">ES</button>
+    </div>
+    <a class="btn small" href="#contact" data-i18n="navcta">Book a call</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="eyebrow" data-i18n="eyebrow">Marketing for heating and cooling shops</div>
+    <h1 data-i18n="h1">Leads you can <em>rely on</em>, every week.</h1>
+    <p class="lede" data-i18n="lede">We run your Google profile, your reviews and your customer follow-up every week. You approve what goes out. Your phone rings.</p>
+    <div class="row">
+      <a class="btn" href="#contact" data-i18n="cta1">Book a 20-minute call</a>
+      <a class="btn light" href="#services" data-i18n="cta2">See what we do</a>
+    </div>
+  </div>
+
+  <div class="wrap three" id="services">
+    <div class="box top">
+      <h3 data-i18n="s1h">Google profile</h3>
+      <p data-i18n="s1p">A new post and real job photos every week, so you show up when people search for AC repair nearby.</p>
+    </div>
+    <div class="box top">
+      <h3 data-i18n="s2h">Reviews</h3>
+      <p data-i18n="s2p">Every customer gets asked after the job. Every review gets a reply, and you see the bad ones first.</p>
+    </div>
+    <div class="box top">
+      <h3 data-i18n="s3h">Tune-up campaigns</h3>
+      <p data-i18n="s3p">Past customers hear from you before AC season and before furnace season.</p>
+    </div>
+  </div>
+
+  <section class="band" id="how">
+    <div class="wrap">
+      <h2 data-i18n="h_h">How it works</h2>
+      <ol class="steps">
+        <li><div class="n" data-i18n="n1">Step 1</div><h3 data-i18n="h1h">One 45-minute call</h3><p data-i18n="h1p">We learn your services, prices and service area. You do this once.</p></li>
+        <li><div class="n" data-i18n="n2">Step 2</div><h3 data-i18n="h2h">Add us as a manager</h3><p data-i18n="h2p">On your Google profile, without your password. The accounts stay in your name.</p></li>
+        <li><div class="n" data-i18n="n3">Step 3</div><h3 data-i18n="h3h">We do the weekly work</h3><p data-i18n="h3p">Posts, photos, review replies, messages. Prices and complaints wait for your OK.</p></li>
+        <li><div class="n" data-i18n="n4">Step 4</div><h3 data-i18n="h4h">One page a month</h3><p data-i18n="h4p">Calls from Google, new reviews, tune-ups booked. Then a 15-minute call.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap rules" id="rules">
+    <h2 data-i18n="r_h">Rules we work by</h2>
+    <div class="three">
+      <div class="box"><h3 data-i18n="r1h">Your accounts stay yours</h3><p data-i18n="r1p">If you leave, you keep the listing, the reviews and everything we built.</p></div>
+      <div class="box"><h3 data-i18n="r2h">We report booked jobs</h3><p data-i18n="r2p">Clicks and impressions do not pay your techs.</p></div>
+      <div class="box"><h3 data-i18n="r3h">A person reads everything</h3><p data-i18n="r3p">We use AI to draft. Nothing goes out until one of us checks it.</p></div>
+      <div class="box"><h3 data-i18n="r4h">No fake or paid reviews</h3><p data-i18n="r4p">We ask every real customer, on Google only.</p></div>
+      <div class="box"><h3 data-i18n="r5h">No texts without permission</h3><p data-i18n="r5p">Only customers who agreed to hear from you, with an easy opt-out.</p></div>
+      <div class="box"><h3 data-i18n="r6h">No claims you did not make</h3><p data-i18n="r6p">Prices, financing and rebates appear only as you gave them to us.</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 data-i18n="c_h">Tell us the one thing you want fixed</h2>
+        <p data-i18n="c_p">Twenty minutes on the phone. We look at your Google listing first and tell you what we would change, whether or not you hire us.</p>
+        <p class="es" data-i18n="c_es">Hablamos español.</p>
+        <ul class="reach" id="reach"></ul>
+        <div class="setup" id="setup" hidden>Setup note: add your email and phone in the CONTACT line at the top of the page script. This note disappears once both are set.</div>
+      </div>
+      <form id="lead" novalidate>
+        <div class="field"><label for="f-name" data-i18n="l1">Your name</label><input id="f-name" autocomplete="name" required></div>
+        <div class="field"><label for="f-shop" data-i18n="l2">Shop name</label><input id="f-shop" autocomplete="organization" required></div>
+        <div class="field"><label for="f-city" data-i18n="l3">City</label><input id="f-city" autocomplete="address-level2"></div>
+        <div class="field"><label for="f-phone" data-i18n="l4">Phone</label><input id="f-phone" type="tel" autocomplete="tel" required></div>
+        <div class="field wide"><label for="f-fix" data-i18n="l5">What do you want fixed in the next 60 days?</label><textarea id="f-fix"></textarea></div>
+        <div class="actions">
+          <button class="btn orange" type="submit" data-i18n="send">Email this to us</button>
+          <button class="btn light" type="button" id="copy" data-i18n="copy">Copy message</button>
+        </div>
+        <p class="status" id="status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C18.5 5.5 20.5 12.5 12 20.5C3.5 12.5 5.5 5.5 12 2Z" fill="#B5481A" transform="rotate(35 12 12)"/></svg>
+    <span>© 2026 Steady Leads · Santa Ana, California · <span data-i18n="foot">Marketing for heating and cooling contractors</span></span>
+  </div>
+</footer>
+
+<script>
+// ---- Set these two values. Leave empty until you have them. ----
+const CONTACT = { email: "", phone: "" };
+
+const ES = {
+  nav1: "Qué hacemos", nav2: "Cómo funciona", nav3: "Nuestras reglas", navcta: "Agendar llamada",
+  eyebrow: "Marketing para negocios de calefacción y aire acondicionado",
+  h1: "Llamadas con las que <em>puede contar</em>, cada semana.",
+  lede: "Cada semana manejamos su perfil de Google, sus reseñas y el seguimiento a sus clientes. Usted aprueba lo que sale. Su teléfono suena.",
+  cta1: "Agendar una llamada de 20 minutos", cta2: "Ver qué hacemos",
+  s1h: "Perfil de Google", s1p: "Una publicación nueva y fotos reales de trabajos cada semana, para que aparezca cuando la gente busca reparación de aire acondicionado cerca.",
+  s2h: "Reseñas", s2p: "A cada cliente se le pide una reseña después del trabajo. Cada reseña recibe respuesta, y las malas las ve usted primero.",
+  s3h: "Campañas de mantenimiento", s3p: "Sus clientes anteriores reciben noticias suyas antes de la temporada de aire y antes de la de calefacción.",
+  h_h: "Cómo funciona",
+  n1: "Paso 1", n2: "Paso 2", n3: "Paso 3", n4: "Paso 4",
+  h1h: "Una llamada de 45 minutos", h1p: "Conocemos sus servicios, precios y zona de servicio. Solo se hace una vez.",
+  h2h: "Nos agrega como administradores", h2p: "En su perfil de Google, sin darnos su contraseña. Las cuentas siguen a su nombre.",
+  h3h: "Hacemos el trabajo semanal", h3p: "Publicaciones, fotos, respuestas a reseñas, mensajes. Los precios y las quejas esperan su aprobación.",
+  h4h: "Una página al mes", h4p: "Llamadas desde Google, reseñas nuevas, mantenimientos agendados. Luego una llamada de 15 minutos.",
+  r_h: "Las reglas con las que trabajamos",
+  r1h: "Sus cuentas siguen siendo suyas", r1p: "Si se va, se queda con el perfil, las reseñas y todo lo que construimos.",
+  r2h: "Reportamos trabajos agendados", r2p: "Los clics y las impresiones no pagan a sus técnicos.",
+  r3h: "Una persona lee todo", r3p: "Usamos inteligencia artificial para los borradores. Nada sale hasta que uno de nosotros lo revisa.",
+  r4h: "Nada de reseñas falsas ni pagadas", r4p: "Le pedimos reseña a cada cliente real, solo en Google.",
+  r5h: "Nada de mensajes sin permiso", r5p: "Solo a clientes que aceptaron recibirlos, con una forma fácil de darse de baja.",
+  r6h: "Nada de promesas que usted no hizo", r6p: "Precios, financiamiento y reembolsos aparecen solo como usted nos los dio.",
+  c_h: "Díganos qué es lo que más quiere arreglar",
+  c_p: "Veinte minutos por teléfono. Primero revisamos su perfil de Google y le decimos qué cambiaríamos, nos contrate o no.",
+  c_es: "We speak English too.",
+  l1: "Su nombre", l2: "Nombre del negocio", l3: "Ciudad", l4: "Teléfono",
+  l5: "¿Qué quiere arreglar en los próximos 60 días?",
+  send: "Enviarnos esto por correo", copy: "Copiar mensaje",
+  foot: "Marketing para contratistas de calefacción y aire acondicionado"
+};
+const UI = {
+  en: { need: "Add your name, shop name and phone first.", copied: "Message copied. Paste it into an email or text to us.", nocopy: "Could not copy. Select this text and copy it:", opening: "Opening your email app. If nothing opens, use Copy message.", noemail: "Our email is not set up on this page yet. Use Copy message.", subject: "Call request from " },
+  es: { need: "Primero ponga su nombre, el nombre del negocio y su teléfono.", copied: "Mensaje copiado. Péguelo en un correo o mensaje para nosotros.", nocopy: "No se pudo copiar. Seleccione este texto y cópielo:", opening: "Abriendo su aplicación de correo. Si no abre, use Copiar mensaje.", noemail: "Nuestro correo todavía no está configurado en esta página. Use Copiar mensaje.", subject: "Solicitud de llamada de " }
+};
+
+const nodes = Array.from(document.querySelectorAll("[data-i18n]"));
+const EN = {};
+nodes.forEach(n => { EN[n.dataset.i18n] = n.innerHTML; });
+let lang = "en";
+const statusEl = document.getElementById("status");
+
+function setLang(next) {
+  lang = next === "es" ? "es" : "en";
+  const dict = lang === "es" ? ES : EN;
+  nodes.forEach(n => { const v = dict[n.dataset.i18n]; if (v) n.innerHTML = v; });
+  document.documentElement.lang = lang;
+  document.getElementById("lang-en").setAttribute("aria-pressed", String(lang === "en"));
+  document.getElementById("lang-es").setAttribute("aria-pressed", String(lang === "es"));
+  statusEl.textContent = "";
+  try { localStorage.setItem("sl-lang", lang); } catch (e) {}
+}
+
+function renderReach() {
+  const ul = document.getElementById("reach");
+  ul.textContent = "";
+  const rows = [];
+  if (CONTACT.phone) rows.push([CONTACT.phone, "tel:" + CONTACT.phone.replace(/[^+\d]/g, "")]);
+  if (CONTACT.email) rows.push([CONTACT.email, "mailto:" + CONTACT.email]);
+  rows.forEach(r => {
+    const li = document.createElement("li");
+    const a = document.createElement("a"); a.href = r[1]; a.textContent = r[0];
+    li.append(a); ul.append(li);
+  });
+  document.getElementById("setup").hidden = Boolean(CONTACT.email && CONTACT.phone);
+}
+
+function val(id) { return document.getElementById(id).value.trim(); }
+function buildMessage() {
+  if (!val("f-name") || !val("f-shop") || !val("f-phone")) return null;
+  return [
+    "Name: " + val("f-name"),
+    "Shop: " + val("f-shop"),
+    "City: " + (val("f-city") || "-"),
+    "Phone: " + val("f-phone"),
+    "Wants fixed in 60 days: " + (val("f-fix") || "-")
+  ].join("\n");
+}
+
+document.getElementById("lead").addEventListener("submit", e => {
+  e.preventDefault();
+  const msg = buildMessage();
+  if (!msg) { statusEl.textContent = UI[lang].need; return; }
+  if (!CONTACT.email) { statusEl.textContent = UI[lang].noemail; return; }
+  statusEl.textContent = UI[lang].opening;
+  window.location.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent(UI[lang].subject + val("f-shop")) + "&body=" + encodeURIComponent(msg);
+});
+
+document.getElementById("copy").addEventListener("click", async () => {
+  const msg = buildMessage();
+  if (!msg) { statusEl.textContent = UI[lang].need; return; }
+  try {
+    await navigator.clipboard.writeText(msg);
+    statusEl.textContent = UI[lang].copied;
+  } catch (e) {
+    statusEl.textContent = UI[lang].nocopy + " " + msg.replace(/\n/g, " | ");
+  }
+});
+
+document.getElementById("lang-en").addEventListener("click", () => setLang("en"));
+document.getElementById("lang-es").addEventListener("click", () => setLang("es"));
+
+renderReach();
+let saved = null;
+try { saved = localStorage.getItem("sl-lang"); } catch (e) {}
+if (saved === "es") setLang("es");
+</script>
+</body>
+</html>
