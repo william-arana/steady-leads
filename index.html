@@ -61,8 +61,7 @@ h1 em { color: var(--leaf); }
   <div class="foot">© Steady Leads</div>
 </div>
 <script>
-// Pick one of the two forest videos at random on every visit.
-const pick = Math.random() < 0.5 ? "forest-1" : "forest-2";
+const pick = "forest-2";
 const v = document.getElementById("bg");
 v.poster = "assets/" + pick + ".jpg";
 v.style.backgroundImage = "url(assets/" + pick + ".jpg)";
