@@ -4,87 +4,84 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Steady Leads</title>
-<meta name="description" content="Steady Leads: marketing for the trades. Google profile, reviews and customer follow-up, run every week.">
-<link rel="stylesheet" href="site.css">
+<meta name="description" content="Steady Leads: marketing for the trades.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Landing: one full-screen forest video, a purpose statement, nothing else. Single dark theme by choice. */
+:root {
+  color-scheme: dark;
+  --cream: #F6F2E9;
+  --leaf: #E9A176;
+  --shade: rgba(14, 16, 12, 0.58);
+  --serif: "EB Garamond", Garamond, Georgia, serif;
+  --mono: "Spline Sans Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: #14170F; color: var(--cream); font-family: var(--mono); overflow: hidden; }
+.bg { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; background-size: cover; background-position: center; }
+.shade { position: fixed; inset: 0; background: var(--shade); }
+.frame { position: relative; height: 100%; display: flex; flex-direction: column; padding: 28px 48px; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { display: flex; align-items: center; gap: 10px; color: var(--cream); text-decoration: none; font-family: "Trebuchet MS", "Lucida Grande", Arial, sans-serif; font-weight: 700; font-size: 17px; letter-spacing: .24em; text-transform: uppercase; }
+.links { display: flex; gap: 28px; }
+.links a, .foot { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--cream); text-decoration: none; }
+.links a { padding: 8px 0; }
+.links a:hover { text-decoration: underline; text-underline-offset: 5px; }
+:focus-visible { outline: 2px solid var(--cream); outline-offset: 4px; }
+.mid { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 30px; padding: 24px 0; }
+.label { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; opacity: .75; }
+h1 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(27px, 3.7vw, 40px); line-height: 1.32; letter-spacing: -.01em; max-width: 15.5em; text-wrap: balance; }
+h1 em { color: var(--leaf); }
+.foot { align-self: flex-end; }
+@media (max-width: 600px) { .frame { padding: 22px 20px; } .logo { font-size: 14px; letter-spacing: .18em; } .links { gap: 18px; } }
+</style>
 </head>
 <body>
-<header>
-  <div class="wrap bar">
-    <a class="mark" href="index.html" aria-label="Steady Leads home"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C18.5 5.5 20.5 12.5 12 20.5C3.5 12.5 5.5 5.5 12 2Z" fill="#B5481A" transform="rotate(35 12 12)"/><path d="M12 6V19" stroke="#F3F1EB" stroke-width="1.2" transform="rotate(35 12 12)"/><path d="M12 19.5V23.5" stroke="#B5481A" stroke-width="1.6" stroke-linecap="round" transform="rotate(35 12 12)"/></svg> Steady Leads</a>
-    <nav aria-label="Pages"><a href="what-we-do.html" data-i18n="nav1">What we do</a><a href="how-it-works.html" data-i18n="nav2">How it works</a><a href="our-principles.html" data-i18n="nav3">Our principles</a><a href="who-we-are.html" data-i18n="nav4">Who we are</a></nav>
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" id="lang-en" aria-pressed="true">EN</button>
-      <button type="button" id="lang-es" aria-pressed="false">ES</button>
-    </div>
-    <a class="btn small" href="#contact" data-i18n="navcta">Book a call</a>
-  </div>
-</header>
-<main id="top">
-
-  <div class="wrap hero">
-    <div class="eyebrow" data-i18n="eyebrow">Marketing for the trades</div>
-    <h1 data-i18n="h1">Leads you can <em>rely on</em>, every week.</h1>
-    <p class="lede" data-i18n="lede">We run your Google profile, your reviews and your customer follow-up every week. You approve what goes out. Your phone rings.</p>
-    <div class="row">
-      <a class="btn" href="#contact" data-i18n="cta1">Book a 20-minute call</a>
-      <a class="btn light" href="what-we-do.html" data-i18n="cta2">See what we do</a>
+<video class="bg" id="bg" muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+<div class="shade"></div>
+<div class="frame">
+  <div class="top">
+    <a class="logo" href="home.html" aria-label="Steady Leads home">
+      <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><g transform="rotate(35 12 12)"><path fill-rule="evenodd" d="M12 2C18.5 5.5 20.5 12.5 12 20.5C3.5 12.5 5.5 5.5 12 2ZM11.4 6V19H12.6V6Z" fill="#F6F2E9"/><path d="M12 19.5V23.5" stroke="#F6F2E9" stroke-width="1.6" stroke-linecap="round"/></g></svg>
+      Steady Leads
+    </a>
+    <div class="links">
+      <a href="home.html" id="l-home">Home</a>
+      <a href="home.html#contact" id="l-contact">Contact</a>
     </div>
   </div>
-
-  <div class="wrap three pad">
-    <div class="box top"><h3 data-i18n="s1h">Google profile</h3><p data-i18n="s1p">A new post and real job photos every week, so you show up when people search for AC repair nearby.</p></div>
-    <div class="box top"><h3 data-i18n="s2h">Reviews</h3><p data-i18n="s2p">Every customer gets asked after the job. Every review gets a reply, and you see the bad ones first.</p></div>
-    <div class="box top"><h3 data-i18n="s3h">Tune-up campaigns</h3><p data-i18n="s3p">Past customers hear from you before AC season and before furnace season.</p></div>
-  </div>
-
-  <section class="band">
-    <div class="wrap">
-      <h2 data-i18n="h_h">How it works</h2>
-      <ol class="steps">
-        <li><div class="n" data-i18n="n1">Step 1</div><h3 data-i18n="h1h">One 45-minute call</h3><p data-i18n="h1p">We learn your services, prices and service area. You do this once.</p></li>
-        <li><div class="n" data-i18n="n2">Step 2</div><h3 data-i18n="h2h">Add us as a manager</h3><p data-i18n="h2p">On your Google profile, without your password. The accounts stay in your name.</p></li>
-        <li><div class="n" data-i18n="n3">Step 3</div><h3 data-i18n="h3h">We do the weekly work</h3><p data-i18n="h3p">Posts, photos, review replies, messages. Prices and complaints wait for your OK.</p></li>
-        <li><div class="n" data-i18n="n4">Step 4</div><h3 data-i18n="h4h">One page a month</h3><p data-i18n="h4p">Calls from Google, new reviews, tune-ups booked. Then a 15-minute call.</p></li>
-      </ol>
-      <p class="more"><a href="how-it-works.html" data-i18n="more_how">See a typical week</a> · <a href="our-principles.html" data-i18n="more_pr">Read our principles</a></p>
-    </div>
-  </section>
-
-  <section class="contact" id="contact">
-    <div class="wrap contact-grid">
-      <div>
-        <h2 data-i18n="cta_h">Tell us the one thing you want fixed</h2>
-        <p data-i18n="cta_p">Twenty minutes on the phone. We look at your Google listing first and tell you what we would change, whether or not you hire us.</p>
-        <p class="es" data-i18n="c_es">Hablamos español.</p>
-        <ul class="reach" id="reach"></ul>
-        <div class="setup" id="setup" hidden>Setup note: add your email and phone in the CONTACT line at the top of site.js. This note disappears once both are set.</div>
-      </div>
-      <form id="lead" novalidate>
-        <div class="field"><label for="f-name" data-i18n="l1">Your name</label><input id="f-name" autocomplete="name" required></div>
-        <div class="field"><label for="f-shop" data-i18n="l2">Shop name</label><input id="f-shop" autocomplete="organization" required></div>
-        <div class="field"><label for="f-city" data-i18n="l3">City</label><input id="f-city" autocomplete="address-level2"></div>
-        <div class="field"><label for="f-phone" data-i18n="l4">Phone</label><input id="f-phone" type="tel" autocomplete="tel" required></div>
-        <div class="field wide"><label for="f-fix" data-i18n="l5">What do you want fixed in the next 60 days?</label><textarea id="f-fix"></textarea></div>
-        <div class="actions">
-          <button class="btn orange" type="submit" data-i18n="send">Email this to us</button>
-          <button class="btn light" type="button" id="copy" data-i18n="copy">Copy message</button>
-        </div>
-        <p class="status" id="status" role="status"></p>
-      </form>
-    </div>
-  </section>
-</main>
-<footer>
-  <div class="wrap foot">
-    <div class="foot-brand"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C18.5 5.5 20.5 12.5 12 20.5C3.5 12.5 5.5 5.5 12 2Z" fill="#B5481A" transform="rotate(35 12 12)"/><path d="M12 6V19" stroke="#F3F1EB" stroke-width="1.2" transform="rotate(35 12 12)"/><path d="M12 19.5V23.5" stroke="#B5481A" stroke-width="1.6" stroke-linecap="round" transform="rotate(35 12 12)"/></svg> <span>© 2026 Steady Leads · Santa Ana, California · <span data-i18n="foot">Marketing for the trades</span></span></div>
-    <div class="foot-links"><a href="what-we-do.html" data-i18n="nav1">What we do</a><a href="how-it-works.html" data-i18n="nav2">How it works</a><a href="our-principles.html" data-i18n="nav3">Our principles</a><a href="who-we-are.html" data-i18n="nav4">Who we are</a></div>
-    <div class="foot-links social" aria-label="Social media">
-      <a href="#" data-social="linkedin">LinkedIn</a>
-      <a href="#" data-social="facebook">Facebook</a>
-      <a href="#" data-social="instagram">Instagram</a>
-    </div>
-  </div>
-</footer>
-<script src="site.js"></script>
+  <main class="mid">
+    <div class="label" id="l-label">Purpose</div>
+    <h1 id="l-purpose">Give every good trades shop a <em>steady</em> flow of work, earned honestly.</h1>
+  </main>
+  <div class="foot">© Steady Leads</div>
+</div>
+<script>
+// Pick one of the two forest videos at random on every visit.
+const pick = Math.random() < 0.5 ? "forest-1" : "forest-2";
+const v = document.getElementById("bg");
+v.poster = "assets/" + pick + ".jpg";
+v.style.backgroundImage = "url(assets/" + pick + ".jpg)";
+const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!still) {
+  v.src = "assets/" + pick + ".mp4";
+  const p = v.play();
+  if (p && p.catch) p.catch(() => {});
+}
+// Follow the language chosen on the rest of the site.
+let lang = null;
+try { lang = localStorage.getItem("sl-lang"); } catch (e) {}
+if (lang === "es") {
+  document.documentElement.lang = "es";
+  document.getElementById("l-home").textContent = "Inicio";
+  document.getElementById("l-contact").textContent = "Contacto";
+  document.getElementById("l-label").textContent = "Propósito";
+  document.getElementById("l-purpose").innerHTML = "Darle a cada buen negocio de oficios un flujo <em>constante</em> de trabajo, ganado con honestidad.";
+}
+</script>
 </body>
 </html>
