@@ -107,6 +107,21 @@ footer { padding: 26px 0 40px; font-size: 14px; border-top: 2px solid var(--gree
 .foot-links a { color: var(--ink); }
 .foot-links.social a { font-weight: 700; color: var(--green); }
 
+.plan { display: flex; flex-direction: column; gap: 6px; }
+.plan.pick { border-color: var(--orange); }
+.tag { align-self: flex-start; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--orange); padding: 4px 10px; border-radius: 3px; margin-bottom: 6px; }
+.box .price, .detail .price { font-family: var(--head); font-size: 38px; font-weight: 700; color: var(--green); line-height: 1.1; }
+.price small { font-family: var(--body); font-size: 16px; font-weight: 400; color: var(--ink); margin-left: 4px; }
+.detail .founding { font-size: 15px; font-weight: 700; color: var(--orange); }
+.detail .note { margin-top: 16px; font-size: 15px; }
+
+@media (max-width: 1320px) {
+  .bar { gap: 16px; }
+  nav { gap: 16px; }
+  nav a { font-size: 15px; }
+  .mark { font-size: 23px; }
+  .btn.small { padding: 10px 16px; font-size: 15px; }
+}
 @media (max-width: 960px) {
   .wrap { padding-left: 20px; padding-right: 20px; }
   .three, .two, .contact-grid { grid-template-columns: 1fr; }
